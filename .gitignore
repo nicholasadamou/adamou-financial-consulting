@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.DS_Store
+.openai/site-workflow/
+
+.vercel/
+.vercel
+
+test-results/
+playwright-report/
+
+.openai/
+
+.astro/

@@ -1,0 +1,157 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "installCommand": "bun install --frozen-lockfile",
+  "buildCommand": "bun run build",
+  "outputDirectory": "apps/site/dist",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "DENY",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+        "Vary": "Accept"
+      },
+      "continue": true
+    },
+    {
+      "src": "/api/activity/?",
+      "dest": "/api/activity"
+    },
+    {
+      "src": "/tools/(monthly-budget|emergency-fund|savings-goal|debt-payoff|net-worth|compound-growth|loan-payment|inflation|monthly-savings|debt-to-income|hourly-pay|recurring-costs|savings-rate|simple-interest|discount-savings|cost-per-use)",
+      "headers": {
+        "Location": "/tools/$1/"
+      },
+      "status": 308
+    },
+    {
+      "src": "/content/tools/(monthly-budget|emergency-fund|savings-goal|debt-payoff|net-worth|compound-growth|loan-payment|inflation|monthly-savings|debt-to-income|hourly-pay|recurring-costs|savings-rate|simple-interest|discount-savings|cost-per-use)\\.md",
+      "headers": {
+        "Link": "<https://adamou-financial-consulting.vercel.app/tools/$1/>; rel=\"canonical\""
+      },
+      "continue": true
+    },
+    {
+      "src": "/tools/(monthly-budget|emergency-fund|savings-goal|debt-payoff|net-worth|compound-growth|loan-payment|inflation|monthly-savings|debt-to-income|hourly-pay|recurring-costs|savings-rate|simple-interest|discount-savings|cost-per-use)/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "dest": "/content/tools/$1.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      }
+    },
+    {
+      "src": "/tools/(monthly-budget|emergency-fund|savings-goal|debt-payoff|net-worth|compound-growth|loan-payment|inflation|monthly-savings|debt-to-income|hourly-pay|recurring-costs|savings-rate|simple-interest|discount-savings|cost-per-use)/",
+      "dest": "/tools/$1/index.html"
+    },
+    {
+      "src": "/pages/home\\.html",
+      "headers": {
+        "Location": "/"
+      },
+      "status": 308
+    },
+    {
+      "src": "/pages/(services|about|approach|contact|brand|privacy|tools)\\.html",
+      "headers": {
+        "Location": "/$1/"
+      },
+      "status": 308
+    },
+    {
+      "src": "/content/home\\.md",
+      "headers": {
+        "Link": "<https://adamou-financial-consulting.vercel.app/>; rel=\"canonical\""
+      },
+      "continue": true
+    },
+    {
+      "src": "/content/(services|about|approach|contact|brand|privacy|tools)\\.md",
+      "headers": {
+        "Link": "<https://adamou-financial-consulting.vercel.app/$1/>; rel=\"canonical\""
+      },
+      "continue": true
+    },
+    {
+      "src": "/(services|about|approach|contact|brand|privacy|tools)",
+      "headers": {
+        "Location": "/$1/"
+      },
+      "status": 308
+    },
+    {
+      "src": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "dest": "/content/home.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      }
+    },
+    {
+      "src": "/(services|about|approach|contact|brand|privacy|tools)/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "dest": "/content/$1.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      }
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(services|about|approach|contact|brand|privacy|tools)/",
+      "dest": "/$1/index.html"
+    },
+    {
+      "src": "/content/(.*)",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "status": 404,
+      "dest": "/content/not-found.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
+    }
+  ]
+}

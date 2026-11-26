@@ -1,0 +1,51 @@
+name: release
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Verified tag to release
+        required: true
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: release-${{ github.event.inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+env:
+  RELEASE_TAG: ${{ github.event.inputs.tag || github.ref_name }}
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+          fetch-depth: 0
+      - name: Validate tag
+        run: |
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          git merge-base --is-ancestor HEAD origin/main
+      - uses: flox/install-flox-action@5bb9eaaffbeaa699a8251a1ae21ecf4c8e0e37d4
+        with:
+          version: 1.18.1
+      - name: Verify and build
+        run: flox activate -- bash -c 'bun install --frozen-lockfile && node node_modules/@playwright/test/cli.js install --with-deps --only-shell chromium && ./scripts/check.sh'
+      - name: Package static site
+        run: |
+          cp LICENSE apps/site/dist/LICENSE
+          tar -czf afin-site.tar.gz -C apps/site/dist .
+          sha256sum afin-site.tar.gz > afin-site.tar.gz.sha256
+      - uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          files: |
+            afin-site.tar.gz
+            afin-site.tar.gz.sha256
+          generate_release_notes: true
+          fail_on_unmatched_files: true
