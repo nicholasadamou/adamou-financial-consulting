@@ -1,46 +1,51 @@
-# <img src="apps/site/public/assets/afin-favicon.svg" width="36" height="36" alt=""> Afin · Adamou Financial Consulting
+# <img src="apps/site/public/assets/afin-favicon.svg" alt="" height="64" /> Afin · Adamou Financial Consulting
 
-[![CI](https://github.com/nicholasadamou/adamou-financial-consulting/actions/workflows/ci.yml/badge.svg)](https://github.com/nicholasadamou/adamou-financial-consulting/actions/workflows/ci.yml)
-[![Astro](https://img.shields.io/badge/Astro-static-BC52EE?logo=astro&logoColor=white)](https://astro.build)
-[![React](https://img.shields.io/badge/React-workspace-149ECA?logo=react)](https://react.dev)
-[![Bun](https://img.shields.io/badge/Bun-1.3.11-black?logo=bun)](https://bun.sh)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vercel](https://img.shields.io/badge/Vercel-hosting-black?logo=vercel)](https://vercel.com)
-[![Flox](https://img.shields.io/badge/Flox-reproducible-6C4CE4)](https://flox.dev)
-[![License](https://img.shields.io/badge/license-PolyForm_Shield-blue)](LICENSE)
+<img src="apps/site/public/assets/afin-social.png" alt="Afin — Less money stress. More possibility." width="1280" />
 
-![Afin — Less money stress. More possibility.](apps/site/public/assets/afin-social.png)
+[![CI](https://img.shields.io/github/actions/workflow/status/nicholasadamou/adamou-financial-consulting/ci.yml?branch=main&label=CI&labelColor=204F60)](https://github.com/nicholasadamou/adamou-financial-consulting/actions/workflows/ci.yml)
+![Astro](https://img.shields.io/badge/Astro-204F60?labelColor=204F60&logoColor=F7F4EB&logo=astro)
+![React](https://img.shields.io/badge/React-204F60?labelColor=204F60&logoColor=F7F4EB&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-204F60?labelColor=204F60&logoColor=F7F4EB&logo=typescript)
+![Bun](https://img.shields.io/badge/Bun-204F60?labelColor=204F60&logoColor=F7F4EB&logo=bun)
+![Flox](https://img.shields.io/badge/Flox-204F60?labelColor=204F60&logoColor=F7F4EB)
+[![License](https://img.shields.io/badge/License-PolyForm_Shield_1.0.0-204F60?labelColor=204F60)](LICENSE)
 
-[Visit Afin](https://adamou-financial-consulting.vercel.app/) · [Documentation](docs/README.md)
+Afin combines Matt Adamou’s financial coaching website with a separate private
+client workspace. The public site includes sixteen calculators, service guides,
+and an intake form. The workspace manages client records, goals, and follow-ups
+with Supabase access controls.
 
-Afin’s public website and Matt’s private client workspace in one Bun monorepo.
+[Visit Afin](https://adamou-financial-consulting.vercel.app/)
 
-- `apps/site`: Astro website, sixteen financial calculators, guides, and intake.
-- `apps/console`: React client records, onboarding, goals, follow-ups, offboarding,
-  and animated business reporting. Supabase enforces Matt-only data access.
-- `packages/intake`: shared field definitions and intake validation.
+## Getting started
 
 ```sh
 flox activate
 bun install --frozen-lockfile
-bunx --bun playwright install chromium
-bun run dev           # public site: localhost:3000
-bun run dev:console   # private workspace: localhost:3100
+bun run dev
 ```
 
-Run `./scripts/check.sh` (with Docker running) for the same quality checks used
-by the pre-commit hook and CI. Flox installs the hook on activation.
-If the public site's test port 3001 is occupied, choose a free port without
-reusing or stopping the existing service:
+## Documentation
 
-```sh
-SITE_TEST_PORT=52685 ./scripts/check.sh
-```
+- [Documentation](docs/README.md): client guidance and project reference.
+- [Getting started and local verification](docs/development.md): Flox, previews, tests, and visual checks.
+- [Private workspace](docs/workspace.md): Supabase setup, access controls, and client workflows.
+- [Intake](docs/intake.md): email drafts and optional Formspree delivery.
+- [Brand assets](docs/brand.md): the mountain mark, palette, and image credits.
+- [Deployment](docs/deployment.md): Vercel hosting and analytics.
 
-See [the documentation](docs/README.md) for client guidance, brand resources,
-Formspree setup, Vercel deployment, analytics, and development.
+## Local verification
 
-See [workspace setup and workflows](docs/workspace.md) to connect Supabase and
-signed Formspree intake. Until connected, production client access stays disabled.
+Run `./scripts/check.sh` inside Flox with Docker running. It checks formatting,
+documentation, types, unit tests, production builds, browser journeys, and visual
+regressions. The pre-commit hook and GitHub Actions use the same entry point.
 
-Licensed under [PolyForm Shield](LICENSE).
+See [development](docs/development.md) for browser installation, the private
+workspace preview, and choosing a free test port.
+
+## License
+
+Copyright © 2026 Nicholas Adamou.
+
+The project is licensed under [PolyForm Shield License 1.0.0](LICENSE), with Nicholas Adamou as
+the holder.
