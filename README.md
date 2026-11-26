@@ -7,7 +7,7 @@
 ![React](https://img.shields.io/badge/React-204F60?labelColor=204F60&logoColor=F7F4EB&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-204F60?labelColor=204F60&logoColor=F7F4EB&logo=typescript)
 ![Bun](https://img.shields.io/badge/Bun-204F60?labelColor=204F60&logoColor=F7F4EB&logo=bun)
-![Flox](https://img.shields.io/badge/Flox-204F60?labelColor=204F60&logoColor=F7F4EB)
+![Flox](https://img.shields.io/badge/Flox-204F60?labelColor=204F60&logoColor=F7F4EB&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNjAgMjYwIj48cGF0aCBkPSJNMjE1LjQ5OCAxNkgxMDAuMjczTDQ0IDczLjE2NjZWMTMwLjMzM0gxMDEuMTY2TDIxNS40OTggNzMuMTY2NlYxNlpNMTAxLjE2NyAxMzAuMzM0SDIxNS40OTlWMTg3LjUwMUgxMDEuMTY3VjEzMC4zMzRaTTQ0IDE4Ny41MTNIMTAxLjE2NlYyNDQuNjc5SDQ0VjE4Ny41MTNaIiBmaWxsPSIjRjdGNEVCIi8%2BPC9zdmc%2B)
 [![License](https://img.shields.io/badge/License-PolyForm_Shield_1.0.0-204F60?labelColor=204F60)](LICENSE)
 
 Afin combines Matt Adamou’s financial coaching website with a separate private
@@ -47,5 +47,4 @@ workspace preview, and choosing a free test port.
 
 Copyright © 2026 Nicholas Adamou.
 
-The project is licensed under [PolyForm Shield License 1.0.0](LICENSE), with Nicholas Adamou as
-the holder.
+The project is licensed under [PolyForm Shield License 1.0.0](LICENSE).
